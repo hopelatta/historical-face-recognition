@@ -1,0 +1,41 @@
+<!--
+Name: Hope Latta
+Student Number: 100106999
+Course: Final Project
+School: Acadia
+Version: 1.0
+Purpose: this is the upload page
+Notes: None.
+URL: Unknown.
+Known errors: 
+-->
+
+<html lang="en">
+    
+    <head>
+    <title>WWI Face Database</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="login.css" />
+</head>
+    
+<body>
+    <header>
+        <h1> World War 1 Face Database</h1>
+    </header>
+      <nav class="sitenav">
+        <ul>
+            <li><a href="index.html">Home Page</a></li>
+            <li><a href="upload.html">Upload</a></li>
+            <li><a href="copyright.html">Copyright</a></li>
+        </ul>
+    </nav>
+    <form action="upload.php" method="post"
+          enctype="multipart/form-data">
+        Select image to upload: 
+        <input type="file" name="fileUpload" id="fileToUpload">
+        <input type="submit" value="Upload" name="Submit"> 
+    </form>
+    </body>    
+
+</html>
+
