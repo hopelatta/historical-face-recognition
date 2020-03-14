@@ -20,13 +20,14 @@ if ($isLoggedIn === true) {
 
     ?>
 
-    <form action="recognize.php" method="post" enctype="multipart/form-data">
-        Select image to recognize: 
-        <input type="file" name="file" id="fileToUpload">
-        <input type="submit" value="Upload" name="Submit"> 
-    </form> 
+    <h3> Please contact the Hantsport Historical Society for more information regarding photographs. </h3>
+    <h3>
+    Email: hantsportareahistoricalsociety@gmail.com
+    </h3>
+
 
     <?php
+
 
 	include 'footer.php';
 	
@@ -34,3 +35,7 @@ if ($isLoggedIn === true) {
 	header("Location: index.php");
 }
 ?>
+
+
+
+

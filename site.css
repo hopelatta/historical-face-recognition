@@ -61,7 +61,7 @@ h1 {
   
   /* Avatar image */
   img.avatar {
-    width: 40%;
+    width: 100px;
     border-radius: 50%;
   }
   

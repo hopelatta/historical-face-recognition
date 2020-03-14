@@ -1,14 +1,17 @@
 
-CREATE DATABASE `Users`;
+CREATE DATABASE `WW2FaceRec`;
 
-USE `Users`;
+USE `WW2FaceRec`;
 
+create user 'WW2App'@'localhost' identified by 'faceRecApp';
+grant all privileges on WW2FaceRec.* to 'WW2App'@'localhost' with grant option;
+flush privileges;
 
 CREATE TABLE `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`username`)
-) 
+);
 
 INSERT INTO `users`(`username`, `password`) values('Acadia','Jodrey');
 
@@ -16,11 +19,11 @@ INSERT INTO `users`(`username`, `password`) values('Acadia','Jodrey');
 /* Image: stores in base 64 value */
 
 CREATE TABLE IF NOT EXISTS `personphoto` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(500) DEFAULT NULL,
-    
-    /* File content is the photo */
+  `personname` varchar(500) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `filecontent` longblob,
-  `defaultphoto` int(11) NOT NULL DEFAULT '0'
-)
+  PRIMARY KEY (`id`)
+);	
 
