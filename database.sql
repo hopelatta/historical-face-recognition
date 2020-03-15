@@ -1,6 +1,4 @@
-
 CREATE DATABASE `WW2FaceRec`;
-
 USE `WW2FaceRec`;
 
 create user 'WW2App'@'localhost' identified by 'faceRecApp';
@@ -15,9 +13,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users`(`username`, `password`) values('Acadia','Jodrey');
 
-/* Photos: name to go with photo must be the name of the photo*/
-/* Image: stores in base 64 value */
-
 CREATE TABLE IF NOT EXISTS `personphoto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(500) DEFAULT NULL,
@@ -26,4 +21,3 @@ CREATE TABLE IF NOT EXISTS `personphoto` (
   `filecontent` longblob,
   PRIMARY KEY (`id`)
 );	
-
