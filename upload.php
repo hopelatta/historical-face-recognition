@@ -16,6 +16,8 @@ if ($action == "upload") {
         
         include 'database.php';
 
+        $db_conn = OpenDbConnection();
+
         if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
                 /* Get information from file */ 
                 /* File Content is the photo, and the name is what the photo was named */
