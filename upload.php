@@ -33,7 +33,7 @@ if ($action == "upload") {
                 } else {
                         echo '<p>upload failure</p>'; 
                 }
-                echo("<p><a href='upload.html'>back</a>");
+                echo("<p><a href='report.php'>back</a>");
         }
         else 
         {
