@@ -23,7 +23,7 @@ if ($isLoggedIn === true) {
 			echo "	<td>".$row["id"]."</td>";
 			echo "	<td>".$row["personname"]."</td>";
 			echo "	<td>".$row["description"]."</td>";
-			echo "	<td>[view]</td>";
+			echo "	<td><a href='imageViewer.php?id=".$row["id"]."' target='new'>view</a></td>";
 			echo "</tr>";
 		}
 		echo "</table>";

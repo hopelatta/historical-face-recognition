@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `personphoto` (
   `filename` varchar(500) DEFAULT NULL,
   `personname` varchar(500) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
+  `encodings` varchar(5000) DEFAULT NULL,
   `filecontent` longblob,
   PRIMARY KEY (`id`)
 );	

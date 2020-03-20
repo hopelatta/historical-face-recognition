@@ -24,8 +24,16 @@ if ($action == "upload") {
                 $fileContent = addslashes(file_get_contents($_FILES['file']['tmp_name'])); 
                 $fileName = $_FILES['file']['name'];
         
+                //get encodings for face (JSON string) and add them to the database with the image.
+                //
+                //
+                //
+                //
+                //
+                $encodings = "";
+
                 /* Add info to database */
-                $sql = "insert into `personphoto` (`personname`,`description`,`filecontent`, `filename`) values ('{$personname}','{$description}', '{$fileContent}', '{$fileName}')";
+                $sql = "insert into `personphoto` (`personname`,`description`,`filecontent`, `filename`, `encodings`) values ('{$personname}','{$description}', '{$fileContent}', '{$fileName}', '{$encodings}')";
 
                 /* Checks to see if file upload is successful */
                 if ($db_conn->query($sql) === TRUE) {
