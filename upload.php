@@ -23,14 +23,16 @@ if ($action == "upload") {
                 /* File Content is the photo, and the name is what the photo was named */
                 $fileContent = addslashes(file_get_contents($_FILES['file']['tmp_name'])); 
                 $fileName = $_FILES['file']['name'];
-        
-                //get encodings for face (JSON string) and add them to the database with the image.
-                //
-                //
-                //
-                //
-                //
-                $encodings = "";
+
+                //save file as pic.jpg for recognize.py (not able to pass in a binary object etc.)
+                $fp = fopen('pic.jpg', 'w');
+                fwrite($fp, file_get_contents($_FILES['file']['tmp_name']));
+                fclose($fp);                
+
+                //get encodings for face and add them to the database with the image.
+                //requires that the pyhton environment has cmake, dlib, and face_recognition (e.g. pip install ...)
+                $command = escapeshellcmd('recognize.py');
+                $encodings = shell_exec($command);
 
                 /* Add info to database */
                 $sql = "insert into `personphoto` (`personname`,`description`,`filecontent`, `filename`, `encodings`) values ('{$personname}','{$description}', '{$fileContent}', '{$fileName}', '{$encodings}')";
