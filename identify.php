@@ -11,11 +11,12 @@ if ($isLoggedIn !== true) {
         exit();
 }
 
-if ($action == "upload") {
-        echo("<p>handle upload</p>");
+if ($action == "uploadRecognize") {
+        echo("<p>handle upload to recognize</p>");
         
         include 'database.php';
 
+        // Get DB connection
         $db_conn = OpenDbConnection();
 
         if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
@@ -38,18 +39,23 @@ if ($action == "upload") {
 
                 $encodings = shell_exec($command);
 
-                echo ("Encodings".$encodings);
+                //echo ("Encodings".$encodings);
+                // Get all face encodings from the database
+                // SQL select
 
-                /* Add info to database */
-                $sql = "insert into `personphoto` (`personname`,`description`,`filecontent`, `filename`, `encodings`) values ('{$personname}','{$description}', '{$fileContent}', '{$fileName}', '{$encodings}')";
-
-                /* Checks to see if file upload is successful */
-                if ($db_conn->query($sql) === TRUE) {
-                        echo '<p>upload successful (id: ' . $db_conn->insert_id . ')'; 
-                } else {
-                        echo '<p>upload failure</p>'; 
-                }
-                echo("<p><a href='report.php'>back</a>");
+                $result = mysql_query("SELECT encodings FROM personphoto");
+                $all_face = array();
+                while($row = mysql_fetch_array($result)){
+                         $all_face[] = $row[$econdings];
+                        }
+                
+                echo ("All face encodings:".$all_face);
+                //Give uploaded picture encoding and all encodings to 
+                // face_recognition's compare_faces() method 
+              //  $value = face_recognition.compare_faces(all_face, encodings, tolerance=0.8);
+                
+               // echo ("Name: ".$value)
+                
         }
         else 
         {
@@ -60,22 +66,17 @@ else
 {
 ?>
         <?php include 'header.php';?>
-
         <div class="loginImage">
             <img src="LoginAvatar.png" alt="Avatar" class="avatar">
         </div>
-
-        <h2>To upload a photo, ensure that the name of the photo is the name of the person in it. Ensure that there are no extra characters in the title. </h2>
+        <h2> Ensure the photo is a .jpeg file. </h2>
+        <h3> Recognize page </h3>
 
         <form action="upload.php" method="post" enctype="multipart/form-data">
                 Select image to upload: 
-                <input type="file" name="file" id="fileToUpload">
-                <br/>
-                Name: <input type="text" name="personname"/>
-                <br/>
-                Description: <input type="text" name="description"/>
+                <input type="file" name="file" id="fileToUpload">      
                 <input type="hidden" name="action" value="upload"/>
-                <input type="submit" value="Upload" name="Submit"> 
+                <input type="submit" value="Upload" name="Submit">           
         </form>
 
         <?php include 'footer.php';?>

@@ -47,7 +47,7 @@ if ($isLoggedIn === true) {
 
 } else {
 	//take the user to the login if they are not signed in
-	include 'header.php';
+	//include 'header.php';
 	?>
 		<form action="index.php" method="post">
 			<div class="loginFields">
