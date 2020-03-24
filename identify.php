@@ -22,6 +22,7 @@ if ($action == "uploadRecognize") {
         if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
                 /* Get information from file */ 
                 /* File Content is the photo, and the name is what the photo was named */
+
                 $fileContent = addslashes(file_get_contents($_FILES['file']['tmp_name'])); 
                 $fileName = $_FILES['file']['name'];
 
@@ -36,26 +37,43 @@ if ($action == "uploadRecognize") {
                 $command = escapeshellcmd('python recognize.py');
                 
                 //Run command, return value added to $encodings (1D array)
+                $encoding_to_identify = shell_exec($command);
 
-                $encodings = shell_exec($command);
-
-                //echo ("Encodings".$encodings);
                 // Get all face encodings from the database
                 // SQL select
-
-                $result = mysql_query("SELECT encodings FROM personphoto");
-                $all_face = array();
-                while($row = mysql_fetch_array($result)){
-                         $all_face[] = $row[$econdings];
+                $sql = "SELECT encodings FROM WW2FaceRec.personphoto";
+                $db_result = $db_conn->query($sql);
+                $all_faces = array();
+                if ($db_result->num_rows > 0) {
+                        while($row = $db_result->fetch_array(MYSQLI_ASSOC)) {
+                                $all_faces[] = $row["encodings"];
                         }
+                }
+
+                //temporarily store all the encodings in a text file, for the python program (can't pass params > 8192bytes)
+                for ($x = 0; $x <= count($all_faces); $x++) {
+                        file_put_contents ("encodings.txt", $all_faces[$x], FILE_APPEND);
+                }
+
+                //command for calling identify.py
+                $command = escapeshellcmd('python identify.py "' . $encoding_to_identify . '"');
                 
-                echo ("All face encodings:".$all_face);
-                //Give uploaded picture encoding and all encodings to 
-                // face_recognition's compare_faces() method 
-              //  $value = face_recognition.compare_faces(all_face, encodings, tolerance=0.8);
-                
-               // echo ("Name: ".$value)
-                
+                //Run command, return value added to $identify_result
+                $identify_result = shell_exec($command);
+
+                //delete the temp file
+                unlink("encodings.txt");
+
+                //
+                //
+                //
+                //
+                echo("response from identify.py is: " . $identify_result);
+                //
+                //
+                //
+                //
+                //
         }
         else 
         {
@@ -72,10 +90,10 @@ else
         <h2> Ensure the photo is a .jpeg file. </h2>
         <h3> Recognize page </h3>
 
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="identify.php" method="post" enctype="multipart/form-data">
                 Select image to upload: 
                 <input type="file" name="file" id="fileToUpload">      
-                <input type="hidden" name="action" value="upload"/>
+                <input type="hidden" name="action" value="uploadRecognize"/>
                 <input type="submit" value="Upload" name="Submit">           
         </form>
 

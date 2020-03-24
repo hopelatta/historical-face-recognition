@@ -28,7 +28,7 @@ if ($isLoggedIn === true) {
 		}
 		echo "</table>";
 	} else {
-		echo "<p>There ar eno photos in the collection.</p>";
+		echo "<p>There are no photos in the collection.</p>";
 	}
 	
 	include 'footer.php';
