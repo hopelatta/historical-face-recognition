@@ -31,14 +31,10 @@ if ($action == "upload") {
 
                 //get encodings for face and add them to the database with the image.
                 //requires that the pyhton environment has cmake, dlib, and face_recognition (e.g. pip install ...)
-                //Returns a 1D array, 128 entries
                 $command = escapeshellcmd('python recognize.py');
                 
                 //Run command, return value added to $encodings (1D array)
-
                 $encodings = shell_exec($command);
-
-                echo ("Encodings".$encodings);
 
                 /* Add info to database */
                 $sql = "insert into `personphoto` (`personname`,`description`,`filecontent`, `filename`, `encodings`) values ('{$personname}','{$description}', '{$fileContent}', '{$fileName}', '{$encodings}')";

@@ -41,18 +41,23 @@ if ($action == "uploadRecognize") {
 
                 // Get all face encodings from the database
                 // SQL select
-                $sql = "SELECT encodings FROM WW2FaceRec.personphoto";
+                $sql = "SELECT id,encodings FROM WW2FaceRec.personphoto";
                 $db_result = $db_conn->query($sql);
                 $all_faces = array();
+                $all_faces_personid = array();
                 if ($db_result->num_rows > 0) {
                         while($row = $db_result->fetch_array(MYSQLI_ASSOC)) {
                                 $all_faces[] = $row["encodings"];
+                                $all_faces_person_id[] = $row["id"];
                         }
                 }
 
                 //temporarily store all the encodings in a text file, for the python program (can't pass params > 8192bytes)
                 for ($x = 0; $x <= count($all_faces); $x++) {
-                        file_put_contents ("encodings.txt", $all_faces[$x], FILE_APPEND);
+                        $encoding = $all_faces[$x];
+                        #$encoding = str_replace("]","",$encoding);
+                        #$encoding = str_replace("[","",$encoding);
+                        file_put_contents ("encodings.txt", $encoding, FILE_APPEND);
                 }
 
                 //command for calling identify.py
@@ -61,24 +66,36 @@ if ($action == "uploadRecognize") {
                 //Run command, return value added to $identify_result
                 $identify_result = shell_exec($command);
 
+                //result is the matching row number from the encodings.txt file
+                //decrement by one (zero-based array)
+                //find the entry, get the personphoto id
+                $result_number = str_replace("\"","",$identify_result);
+                $result_number = (int)$result_number;
+
+                if ($result_number != 0) {
+                        $result = $result_number -1;
+                        $person_id = $all_faces_person_id[$result];
+                        //
+                        // more to do here (get the person name, description)
+                        //
+                        //
+                        echo("<a href='imageViewer.php?id=".$person_id."' target='new'>view match</a>");
+                        //
+                        //
+                        //
+                        //
+                } else {
+                        echo("<p>no match found</p>");
+                }
+
                 //delete the temp file
                 unlink("encodings.txt");
-
-                //
-                //
-                //
-                //
-                echo("response from identify.py is: " . $identify_result);
-                //
-                //
-                //
-                //
-                //
         }
         else 
         {
                 echo("<p>Error, no photo.</p>");
         }
+        echo("<p><a href='report.php'>back</a></p>");
 } 
 else 
 {
