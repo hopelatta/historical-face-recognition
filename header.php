@@ -18,10 +18,10 @@
     </head>
     <body>
     
-        <!-- Navigation -->
+    <!-- Navigation -->
+  <div class="container">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-
+    
       <a class="navbar-brand" href="#">Get started</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,6 +29,9 @@
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="homepage.php">Home</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="report.php">Report</a>
           </li>
@@ -46,20 +49,14 @@
           </li>
         </ul>
       </div>
+      </nav>
     </div>
-  </nav>
+  
 
   <!-- Page Content -->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h1 class="mt-5">World War Face Recognition</h1>
-          </div>
-      </div>
-    </div>
-  </section>
-
+  
+    <h1 class="mt-5">World War Face Recognition</h1>
+  
   <!-- Bootstrap core JavaScript -->
   <script src="bootstrap/vendor/jquery/jquery.min.js"></script>
   <script src="bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

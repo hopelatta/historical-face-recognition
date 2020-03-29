@@ -66,10 +66,10 @@ if ($action == "uploadRecognize") {
                         $index = $result_number -1;
                         $person_id = $all_faces_personid[$index];
                         $person_name = $all_faces_personname[$index];
-
-                        echo("<a href='imageViewer.php?id=".$person_id."' target='new'>view match: " . $person_name . "</a>");
+                        echo("<h3>Match found!</h3>");
+                        echo("<p><a href='imageViewer.php?id=".$person_id."' target='new'>view match: " . $person_name . "</a></p>");
                 } else {
-                        echo("<p>no match found</p>");
+                        echo("<h3>No matches found</h3>");
                 }
         }
         else 
