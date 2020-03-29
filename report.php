@@ -16,7 +16,7 @@ if ($isLoggedIn === true) {
 	$db_result = $db_conn->query($sql);
 	
 	if ($db_result->num_rows > 0) {
-		echo "<table border='1' class='table'><tr><th>Id</th><th>Person</th><th>Description</th><th>&nbsp;</th></tr>";
+		echo "<table border='1' class='table ReportTable'><tr><th>Id</th><th>Person</th><th>Description</th><th>&nbsp;</th></tr>";
 		// output data of each row
 		while($row = $db_result->fetch_assoc()) {
 			echo "<tr>";

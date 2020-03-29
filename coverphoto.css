@@ -2,5 +2,20 @@ body {
     /*background-image: url("vintage-map.jpg") no-repeat center center fixed;
     */
     background-color: white;
-    background-image: url("white-wood.jpg");
+   /* background-image: url("white-wood.jpg"); */
+
+}
+
+h1 {
+    padding-block: 500px;
+}
+
+.ReportTable {
+    width: 500px;
+
+}
+
+footer {
+    padding: 20px;
+    bottom: 100px;
 }

@@ -14,8 +14,6 @@ def ConvertToNpArray(x):
         print(e)
     return face_to_find
 
-
-
 #get the face encoding argument passed in
 face_to_find = ConvertToNpArray(sys.argv[1])
 
