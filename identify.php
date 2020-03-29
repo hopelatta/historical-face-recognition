@@ -52,12 +52,20 @@ if ($action == "uploadRecognize") {
                         }
                 }
 
+                //empty the encodings.txt file (rebuild with current encodings from db, below)
+                $encodingsFile = "encodings.txt";
+                if (file_exists($encodingsFile)) {
+                        $fp = fopen($encodingsFile, "r+");
+                        ftruncate($fp, 0);
+                        fclose($fp);
+                }
+
                 //temporarily store all the encodings in a text file, for the python program (can't pass params > 8192bytes)
                 for ($x = 0; $x <= count($all_faces); $x++) {
                         $encoding = $all_faces[$x];
                         #$encoding = str_replace("]","",$encoding);
                         #$encoding = str_replace("[","",$encoding);
-                        file_put_contents ("encodings.txt", $encoding, FILE_APPEND);
+                        file_put_contents ($encodingsFile, $encoding, FILE_APPEND);
                 }
 
                 //command for calling identify.py
@@ -88,8 +96,6 @@ if ($action == "uploadRecognize") {
                         echo("<p>no match found</p>");
                 }
 
-                //delete the temp file
-                unlink("encodings.txt");
         }
         else 
         {
