@@ -11,8 +11,7 @@
   <!-- Bootstrap core CSS -->
   <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template 
-  <link href="bootstrap/css/the-big-picture.css" rel="stylesheet"> -->
+  <!-- Custom styles for this template -->
   <link href="coverphoto.css" rel="stylesheet">
 
     </head>
