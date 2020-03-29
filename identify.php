@@ -12,10 +12,11 @@ if ($isLoggedIn !== true) {
 }
 
 if ($action == "uploadRecognize") {
-        echo("<p>handle upload to recognize</p>");
+        
+        include 'header.php';
         
         include 'database.php';
-
+        
         // Get DB connection
         $db_conn = OpenDbConnection();
 
@@ -26,12 +27,7 @@ if ($action == "uploadRecognize") {
                 $fileContent = addslashes(file_get_contents($_FILES['file']['tmp_name'])); 
                 $fileName = $_FILES['file']['name'];
 
-                //save file as pic.jpg for recognize.py (not able to pass in a binary object etc.)
-                $fp = fopen('pic.jpg', 'w');
-                fwrite($fp, file_get_contents($_FILES['file']['tmp_name']));
-                fclose($fp);                
-
-                //get encodings for face and add them to the database with the image.
+                //get encodings for face to identify
                 //requires that the pyhton environment has cmake, dlib, and face_recognition (e.g. pip install ...)
                 //Returns a 1D array, 128 entries
                 $command = escapeshellcmd('python recognize.py');
@@ -41,31 +37,17 @@ if ($action == "uploadRecognize") {
 
                 // Get all face encodings from the database
                 // SQL select
-                $sql = "SELECT id,encodings FROM WW2FaceRec.personphoto";
+                $sql = "SELECT id,personname FROM WW2FaceRec.personphoto";
                 $db_result = $db_conn->query($sql);
                 $all_faces = array();
+
                 $all_faces_personid = array();
+                $all_faces_personname = array();
                 if ($db_result->num_rows > 0) {
                         while($row = $db_result->fetch_array(MYSQLI_ASSOC)) {
-                                $all_faces[] = $row["encodings"];
-                                $all_faces_person_id[] = $row["id"];
+                                $all_faces_personid[] = $row["id"];
+                                $all_faces_personname[] = $row["personname"];
                         }
-                }
-
-                //empty the encodings.txt file (rebuild with current encodings from db, below)
-                $encodingsFile = "encodings.txt";
-                if (file_exists($encodingsFile)) {
-                        $fp = fopen($encodingsFile, "r+");
-                        ftruncate($fp, 0);
-                        fclose($fp);
-                }
-
-                //temporarily store all the encodings in a text file, for the python program (can't pass params > 8192bytes)
-                for ($x = 0; $x <= count($all_faces); $x++) {
-                        $encoding = $all_faces[$x];
-                        #$encoding = str_replace("]","",$encoding);
-                        #$encoding = str_replace("[","",$encoding);
-                        file_put_contents ($encodingsFile, $encoding, FILE_APPEND);
                 }
 
                 //command for calling identify.py
@@ -81,27 +63,22 @@ if ($action == "uploadRecognize") {
                 $result_number = (int)$result_number;
 
                 if ($result_number != 0) {
-                        $result = $result_number -1;
-                        $person_id = $all_faces_person_id[$result];
-                        //
-                        // more to do here (get the person name, description)
-                        //
-                        //
-                        echo("<a href='imageViewer.php?id=".$person_id."' target='new'>view match</a>");
-                        //
-                        //
-                        //
-                        //
+                        $index = $result_number -1;
+                        $person_id = $all_faces_personid[$index];
+                        $person_name = $all_faces_personname[$index];
+
+                        echo("<a href='imageViewer.php?id=".$person_id."' target='new'>view match: " . $person_name . "</a>");
                 } else {
                         echo("<p>no match found</p>");
                 }
-
         }
         else 
         {
                 echo("<p>Error, no photo.</p>");
         }
         echo("<p><a href='report.php'>back</a></p>");
+
+        include 'footer.php';
 } 
 else 
 {

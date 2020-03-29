@@ -2,6 +2,7 @@ import face_recognition
 import numpy as np
 import json
 import sys
+import MySQLdb  #pip install MySQL-python
 
 def ConvertToNpArray(x):
     encoding = x.replace("[","")
@@ -14,16 +15,30 @@ def ConvertToNpArray(x):
         print(e)
     return face_to_find
 
+def GetEncodingsFromDatabase():
+    db_faces = []
+    db = MySQLdb.connect(user="WW2App", password="faceRecApp", database="WW2FaceRec", host="localhost")
+    cursor = db.cursor()
+    sql = "SELECT encodings FROM `personphoto`"
+    try:
+        cursor.execute(sql)
+        for row in cursor:
+            row = cursor.fetchone()
+            db_faces.append(row[0])
+    except Exception as e:
+        print(e)
+    db.close()
 
+    all_faces = []
+    for encoding in db_faces:
+        all_faces.append(ConvertToNpArray(encoding))
+    return all_faces
 
 #get the face encoding argument passed in
 face_to_find = ConvertToNpArray(sys.argv[1])
 
 #get all face encodings to compare against
-all_faces = []
-encodings_file = open("encodings.txt")
-for encoding in encodings_file:
-    all_faces.append(ConvertToNpArray(encoding))
+all_faces = GetEncodingsFromDatabase()
 
 #compare faces
 try:
@@ -31,9 +46,8 @@ try:
 except Exception as e: 
     print(e)
 
-#return the line number of the matched photo (in encodings.txt)
+#return the line number of the matched photo
 index_key = 0
-matched_image_id = ""
 for matched in results:
     index_key = index_key + 1
     if matched:
