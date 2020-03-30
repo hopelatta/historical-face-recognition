@@ -87,9 +87,11 @@ else
         <div class="loginImage">
             <img src="LoginAvatar.png" alt="Avatar" class="avatar">
         </div>
-        <h2> Ensure the photo is a .jpeg file. </h2>
-        <h3> Recognize page </h3>
 
+
+        <h3> Identify </h3>        
+        <p> Ensure the photo is a .jpeg file. </p>
+        <br/>
         <form action="identify.php" method="post" enctype="multipart/form-data">
                 Select image to upload: 
                 <input type="file" name="file" id="fileToUpload">      

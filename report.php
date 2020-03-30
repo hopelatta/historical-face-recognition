@@ -7,8 +7,18 @@ if ($isLoggedIn === true) {
 
 	include 'header.php';
 	include 'database.php';
+	?>
+	<br>
+	<p>
+	This page shows all of the photos in the database, the names, and a brief description. 
+	If you have questions, please contact Jamie Symonds (contact information on the Copyright page). 
+	Click the view button to see a picture of the photo. The photos are arranged in such that the first photo uploaded
+	is at the top of the database. 
+ 	History: 
+	</p>
 
-	echo "<h4 class='p-3'>History:</h4>";
+	<?php
+	//echo "<h2 class='p-3'>History:</h2>";
 
 	$db_conn = OpenDbConnection();
 

@@ -53,8 +53,9 @@
   
 
   <!-- Page Content -->
+  <br>
+  <h1 class="mt-5"> World War Face Recognition Database </h1> 
   
-    <h1 class="mt-5">World War Face Recognition</h1>
   
   <!-- Bootstrap core JavaScript -->
   <script src="bootstrap/vendor/jquery/jquery.min.js"></script>
