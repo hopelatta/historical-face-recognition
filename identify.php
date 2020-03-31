@@ -93,10 +93,12 @@ else
             <img src="LoginAvatar.png" alt="Avatar" class="avatar">
         </div>
 
-
         <h3> Identify </h3>        
         <p> Ensure the photo is a .jpeg file. </p>
         <br/>
+        <p> Note: We assume no responsibility for an incorrect match. These names are meant to spark avenues for further investigation.  
+         </p>
+         <br/>
         <form action="identify.php" method="post" enctype="multipart/form-data">
                 Select image to upload: 
                 <input type="file" name="file" id="fileToUpload">      

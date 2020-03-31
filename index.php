@@ -40,8 +40,8 @@ if ($action === "login") {
 $isLoggedIn = isset($_SESSION['isLoggedIn']) ? $_SESSION['isLoggedIn'] : false;
 
 if ($isLoggedIn === true) {
-	//take the user to report.php if they are signed in
-	header("Location: report.php");
+	//take the user to homepage.php if they are signed in
+	header("Location: homepage.php");
 	exit();
 
 } else {
