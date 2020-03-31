@@ -27,6 +27,11 @@ if ($action == "uploadRecognize") {
                 $fileContent = addslashes(file_get_contents($_FILES['file']['tmp_name'])); 
                 $fileName = $_FILES['file']['name'];
 
+                //save file as pic.jpg for recognize.py (not able to pass in a binary object etc.)
+                $fp = fopen('pic.jpg', 'w');
+                fwrite($fp, file_get_contents($_FILES['file']['tmp_name']));
+                fclose($fp);    
+
                 //get encodings for face to identify
                 //requires that the pyhton environment has cmake, dlib, and face_recognition (e.g. pip install ...)
                 //Returns a 1D array, 128 entries
@@ -37,7 +42,7 @@ if ($action == "uploadRecognize") {
 
                 // Get all face encodings from the database
                 // SQL select
-                $sql = "SELECT id,personname FROM WW2FaceRec.personphoto";
+                $sql = "SELECT id,personname FROM WW2FaceRec.personphoto order by id";
                 $db_result = $db_conn->query($sql);
                 $all_faces = array();
 

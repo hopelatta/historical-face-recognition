@@ -42,7 +42,7 @@ all_faces = GetEncodingsFromDatabase()
 
 #compare faces
 try:
-    results = face_recognition.compare_faces(all_faces, face_to_find,  tolerance=0.8)
+    results = face_recognition.compare_faces(all_faces, face_to_find,  tolerance=0.5)
 except Exception as e: 
     print(e)
 

@@ -14,6 +14,10 @@ if ($isLoggedIn !== true) {
 if ($action == "upload") {
         echo("<p>handle upload</p>");
         
+        include 'header.php';
+ 
+        echo("<h2>Photo Upload</h2>");
+
         include 'database.php';
 
         $db_conn = OpenDbConnection();
@@ -51,6 +55,9 @@ if ($action == "upload") {
         {
                 echo("<p>Error, no photo.</p>");
         }
+
+        include 'footer.php';
+
 } 
 else 
 {
