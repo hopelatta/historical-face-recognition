@@ -11,12 +11,14 @@ if ($isLoggedIn === true) {
 	<br>
 	<p>
 	This page shows all of the photos in the database, the names, and a brief description. 
-	If you have questions, please contact Jamie Symonds (contact information on the Copyright page). 
 	Click the view button to see a picture of the photo. The photos are arranged in such that the first photo uploaded
 	is at the top of the database. 
+	<br>
  	History: 
 	</p>
-
+	<div class="loginImage">
+            <img src="LoginAvatar.png" alt="Avatar" class="avatar">
+        </div>
 	<?php
 	//echo "<h2 class='p-3'>History:</h2>";
 

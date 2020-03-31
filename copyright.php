@@ -19,29 +19,28 @@ if ($isLoggedIn === true) {
 	include 'header.php';
 
     ?>
-    <h4> Copyright </h4>
+    <br>
+    <br>
+    <h1> Copyright </h1>
     <br/>
 
-    <h1> Contact information: </h1>
+    <h2> Contact information: </h2>
 
     <p> Please contact the Hantsport Historical Society for more information regarding photographs. 
     <br>
-    <br>
     Email: hantsportareahistoricalsociety@gmail.com
-    <br>
+    <br> 
+    <a href="https://www.facebook.com/HantsportAreaHistoricalSociety/"> Facebook </a> 
+    </p>
+    <p>
     Student: Hope Latta
     <br>
     Email: hopelatta@hotmail.com 
     <br>
     <br>
-    Supervisor: Professor Jamie Symonds
-    <br>
-    Email: jamie.symonds@acadiau.ca
-    <br>
-    <br>
     Jodrey School of Computer Science
     <br>
-    Located in: Acadia University
+    Acadia University
     <br>
     Address: 27 University Ave, Wolfville, NS B4P 2P7
     <br>

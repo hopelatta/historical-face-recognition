@@ -61,16 +61,23 @@ else
             <img src="LoginAvatar.png" alt="Avatar" class="avatar">
         </div>
 
-        <h2>To upload a photo, ensure that the name of the photo is the name of the person in it. Ensure that there are no extra characters in the title. </h2>
+        <p>To upload a photo, ensure that the name of the photo is the name of the person in it. Ensure that there are no extra characters in the title. </p>
 
         <form action="upload.php" method="post" enctype="multipart/form-data">
-                Select image to upload: 
+                Select an image to upload: 
+                <br>
+                <br>
                 <input type="file" name="file" id="fileToUpload">
-                <br/>
+                <br>
+                <br>
                 Name: <input type="text" name="personname"/>
-                <br/>
+                <br>
+                <br>
                 Description: <input type="text" name="description"/>
+                <br>
+                <br>
                 <input type="hidden" name="action" value="upload"/>
+
                 <input type="submit" value="Upload" name="Submit"> 
         </form>
 
